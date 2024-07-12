@@ -7,7 +7,8 @@ centos7 openssh rpms
 ### Upgrade
 To upgrade OpenSSH on CentOS 7 using the provided RPMs or compiling your own, then
 ```
-yum localinstall ./openssh-*.rpm
-chmod 600 /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ed25519_key
+[[ -f /etc/ssh/sshd_config ]] && cp -rf /etc/ssh/sshd_config /etc/ssh/sshd_config.$(date +%Y%m%d)
+yum localinstall ./openssh-*.rpm -y
+chmod -v 600 /etc/ssh/ssh_host_*_key
 systemctl start sshd
 ```
